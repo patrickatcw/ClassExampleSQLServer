@@ -1,0 +1,115 @@
+CREATE DATABASE Ivona
+
+USE Ivona
+CREATE TABLE Job_Title
+(
+JobTitle varchar (100) NOT NULL,
+EEO1Class varchar (100) NOT NULL,
+JobDescription varchar (500) NOT NULL,
+ExemptStatus char (1) NOT NULL
+);
+
+ALTER TABLE Job_title
+ADD PRIMARY KEY (JobTitle); 
+
+--QUERY 3
+EXEC sp_help Job_Title
+
+--QUERY 4 INSERTING INTO JOB_TITLE TABLE
+INSERT INTO Job_Title
+VALUES ('Accounting clerk', 'Office/Clerical', 'Computes, classifies, records, and verifies numerical data for use in maintaining
+accounting records','H');
+
+INSERT INTO Job_Title
+VALUES ('Assistant manager','Officials & Managers','Supervises and coordinates activities of workers in department of food store. 
+Assists store manager in daily operations of store.','S');
+
+INSERT INTO Job_Title
+VALUES ('Bagger','Sales Worker','Places customer orders in bags. Performs carryout duties for customers. Assist customers in 
+carrying out bagged items from the store.','H');
+
+INSERT INTO Job_Title
+VALUES ('Cashier','Sales Worker', 'Operates cash register to itemize and total customer"s purchases in grocery','H');
+
+INSERT INTO Job_Title
+VALUES ('Computer Support Specialist','Technician','Installs/modifies/makes minor repairs to personal computer hardware and
+software systems. Provides technical assistance and training to system users','H');
+
+INSERT INTO Job_Title
+VALUES ('Director of finance and accounting','Officials & Managers','Plans and directs the finance and accounting 
+activities for Kudler Fine Foods','S');
+
+INSERT INTO Job_Title
+ VALUES ('Retail assistant bakery and pastry','Craft workers','Obtains or prepares food items requested 
+ by customers in retail food store','H');
+
+INSERT INTO Job_Title
+ VALUES ('Retail assistant butchers and seafood specialists','Operatives/Semi skilled','Obtains or prepares food items 
+ requested by customers in retail food store','H');
+
+INSERT INTO Job_Title
+VALUES ('Stocker','Office/Clerical','Stores, prices and restocks merchandise displays in store','H');
+
+--QUERY 5 - VALIDATE DATA 
+SELECT * 
+FROM Job_Title;
+
+--QUERY 6
+USE Ivona
+CREATE TABLE Employee
+(
+EmployeeID int IDENTITY NOT NULL,
+LastName varchar (25) NOT NULL,
+FirstName varchar (25) NOT NULL,
+Address1 varchar (30) NOT NULL,
+Address2 varchar (30) NULL,
+City varchar (30) NOT NULL,
+StateId char (2) NOT NULL,
+ZIP varchar (10) NOT NULL,
+PhoneAreaCd char (3) NOT NULL,
+Phone char (7) NOT NULL,
+HireDate date NOT NULL,
+Salary money NOT NULL,
+Gender char (1) NOT NULL,
+Age int NOT NULL,
+JobTitle varchar (100) NOT NULL,
+Race varchar (30) NOT NULL
+);
+
+ALTER TABLE Employee
+ADD PRIMARY KEY (EmployeeID)
+ALTER TABLE Employee
+ADD FOREIGN KEY (JobTitle) REFERENCES Job_Title;
+ 
+
+--QUERY 7
+EXEC sp_help Employee;
+
+
+--QUERY 8 - INSERTING INTO EMPLOYEE TABLE
+INSERT INTO Employee
+VALUES ('Edelman','Glenn','175 Bishops Lane',null,'LaJolla','CA',0,'619','5550199','10/7/2003',21500,'M',64,'cashier','Caucasian')
+
+INSERT INTO Employee
+VALUES ('McMullen','Eric','763 Church St',NULL,'Lemon Grove','CA',0,'619','5550133','11/1/2002',13500,'M',20,'bagger','Caucasian')
+
+INSERT INTO Employee
+VALUES ('Slentz','Raj','123 Tobey Dr',NULL,'North Clairmont','CA',0,'619','5550123','6/1/2000',48000,'M',34,'assistant manager','Asian')
+
+INSERT INTO Employee
+VALUES ('Broun','Erin','2045 Parkway','Apt 2B','Encinitas','CA',0,'760','5550100','3/12/2003',10530,'F',24,'bagger','Caucasian')
+
+INSERT INTO Employee
+VALUES ('Carpenter','Donald','927 Second St',NULL,'Encinitas','CA',0,'619','5550154','11/1/2003',15000,'M',18,'stocker','African American')
+
+INSERT INTO Employee
+VALUES ('Esquivez','David','10983 N.Coast HWY','Apt 902','Encinitas','CA',0,'760','5550108','7/25/2003',18500,'M',25,'Retail assistant butchers and seafood specialists','Hispanic')
+
+INSERT INTO Employee
+VALUES ('Sharp','Nancy','10793 Montecino Rd',null,'Ramona','CA',0,'858','5550135','7/12/2003',21000,'F',24,'cashier','Caucasian')
+
+--QUERY 9 - VALIDATING DATA
+SELECT * 
+FROM Employee
+
+
